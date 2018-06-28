@@ -78,3 +78,9 @@ function checkComment($post, $alertcomment)
 
     header('Location: index.php?action=homeadmin');
 }
+
+function addPost()
+{
+    require('view/frontend/header.php');
+    require('view/frontend/newpost.php');
+}

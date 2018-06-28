@@ -32,6 +32,8 @@ try {
             doAlert($_GET['postid'], $_GET['commentid']);
         } elseif ($_GET['action'] == 'checkcomment') {
             checkComment($_GET['postid'], $_GET['commentid']);
+        } elseif ($_GET['action'] == 'addpost') {
+            addPost();
         }
     }
     else {
