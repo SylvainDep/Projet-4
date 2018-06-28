@@ -23,4 +23,27 @@ class PostManager extends Manager
 
         return $post;
     }
+
+    public function addPost($title, $content)
+    {
+        $db = $this->dbConnect();
+        $posts = $db->prepare('INSERT INTO posts(title, content, creation_date) VALUES(?, ?, NOW())');
+        $affectedLines = $posts->execute(array($title, $content));
+
+        return $affectedLines;
+    }
+
+    public function replacePost($title, $content, $postId)
+    {
+        $db = $this->dbConnect();
+        $posts = $db->prepare('UPDATE posts SET title = :newtitle, content = :newcontent WHERE id = :id');
+        $sendAlert = $posts->execute(array(
+            'newtitle' => $title,
+            'newcontent' => $content,
+            'id' => $postId
+        ));
+
+        return $sendAlert;
+    }
+
 }

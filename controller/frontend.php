@@ -79,7 +79,7 @@ function checkComment($post, $alertcomment)
     header('Location: index.php?action=homeadmin');
 }
 
-function addPost()
+function newPost()
 {
     require('view/frontend/header.php');
     require('view/frontend/newpost.php');
@@ -93,4 +93,32 @@ function editPost()
 
     require('view/frontend/header.php');
     require('view/frontend/editpost.php');
+}
+
+function addPost($title, $content)
+{
+    $postManager = new \Blog\Model\PostManager();
+
+    $affectedLines = $postManager->addPost($title, $content);
+
+    if ($affectedLines === false) {
+        throw new Exception('Impossible d\'ajouter l\'article !');
+    }
+    else {
+        header('Location: index.php?action=homeadmin');
+    }
+}
+
+function updatePost($title, $content, $postId)
+{
+    $postManager = new \Blog\Model\PostManager();
+
+    $affectedLines = $postManager->replacePost($title, $content, $postId);
+
+    if ($affectedLines === false) {
+        throw new Exception('Impossible d\'ajouter l\'article !');
+    }
+    else {
+        header('Location: http://localhost:8888/index.php?action=editpost&id=' .$postId);
+    }
 }

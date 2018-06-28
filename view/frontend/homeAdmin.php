@@ -1,7 +1,7 @@
 <?php ob_start(); ?>
 <h1>Mon super blog !</h1>
 <p>Derniers billets du blog :</p>
-<p><a href="index.php?action=addpost">Ajouter nouvel article</a></p>
+<p><a href="index.php?action=newpost">Ajouter nouvel article</a></p>
 <?php
 while ($data = $posts->fetch())
 {

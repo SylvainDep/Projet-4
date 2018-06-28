@@ -32,10 +32,14 @@ try {
             doAlert($_GET['postid'], $_GET['commentid']);
         } elseif ($_GET['action'] == 'checkcomment') {
             checkComment($_GET['postid'], $_GET['commentid']);
+        } elseif ($_GET['action'] == 'newpost') {
+            newPost();
         } elseif ($_GET['action'] == 'addpost') {
-            addPost();
+            addPost($_POST['title'], $_POST['content']);
         } elseif ($_GET['action'] == 'editpost') {
             editPost();
+        } elseif ($_GET['action'] == 'updatepost') {
+            updatePost($_POST['title'], $_POST['content'], $_GET['id']);
         }
     }
     else {
