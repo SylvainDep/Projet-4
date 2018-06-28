@@ -34,6 +34,8 @@ try {
             checkComment($_GET['postid'], $_GET['commentid']);
         } elseif ($_GET['action'] == 'addpost') {
             addPost();
+        } elseif ($_GET['action'] == 'editpost') {
+            editPost();
         }
     }
     else {

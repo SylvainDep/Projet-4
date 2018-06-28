@@ -15,7 +15,7 @@ while ($data = $posts->fetch())
         <p>
             <?= nl2br(htmlspecialchars(substr($data['content'], 0, 100) . '...')) ?>
             <br />
-            <em><a href="index.php?action=post&amp;id=<?= $data['id'] ?>">Commentaires</a></em>
+            <em><a href="index.php?action=editpost&amp;id=<?= $data['id'] ?>">Editer cet article.</a></em>
         </p>
     </div>
 <?php

@@ -84,3 +84,13 @@ function addPost()
     require('view/frontend/header.php');
     require('view/frontend/newpost.php');
 }
+
+function editPost()
+{
+    $postManager = new \Blog\Model\PostManager();
+
+    $post = $postManager->getPost($_GET['id']);
+
+    require('view/frontend/header.php');
+    require('view/frontend/editpost.php');
+}
