@@ -30,6 +30,7 @@ while ($comment = $alerts->fetch())
     <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date_fr'] ?></p>
     <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
     <a href="index.php?action=checkcomment&amp;postid=<?= $post['id'] ?>&amp;commentid=<?= $comment['id'] ?>">Valider ce commentaire.</a>
+    <a href="index.php?action=deletecomment&amp;id=<?= $comment['id'] ?>">Supprimer l'article</a>
 <?php
 }
 ?>

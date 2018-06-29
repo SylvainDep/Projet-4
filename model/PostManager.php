@@ -46,4 +46,14 @@ class PostManager extends Manager
         return $sendAlert;
     }
 
+    public function deletePost($postId)
+    {
+        $db = $this->dbConnect();
+        $posts = $db->prepare('DELETE FROM posts WHERE id = :id');
+        $affectedLines = $posts->execute(array(
+            'id' => $postId
+        ));
+
+        return $affectedLines;
+    }
 }

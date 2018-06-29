@@ -5,3 +5,4 @@
     <textarea id="blogbody" name="content"><?= $post['content'] ?></textarea>
     <input type="submit"/>
 </form>
+<a href="index.php?action=deletepost&amp;id=<?= $post['id'] ?>">Supprimer l'article</a>

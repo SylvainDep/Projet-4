@@ -122,3 +122,31 @@ function updatePost($title, $content, $postId)
         header('Location: http://localhost:8888/index.php?action=editpost&id=' .$postId);
     }
 }
+
+function deletePost($postId)
+{
+    $postManager = new \Blog\Model\PostManager();
+
+    $affectedLines = $postManager->deletePost($postId);
+
+    if ($affectedLines === false) {
+        throw new Exception('Impossible d\'ajouter l\'article !');
+    }
+    else {
+        header('Location: index.php?action=homeadmin');
+    }
+}
+
+function deleteComment($commentId)
+{
+    $commentManager = new \Blog\Model\CommentManager();
+
+    $affectedLines = $commentManager->removeComment($commentId);
+
+    if ($affectedLines === false) {
+        throw new Exception('Impossible d\'ajouter l\'article !');
+    }
+    else {
+        header('Location: index.php?action=homeadmin');
+    }
+}

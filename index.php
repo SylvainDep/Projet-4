@@ -40,6 +40,10 @@ try {
             editPost();
         } elseif ($_GET['action'] == 'updatepost') {
             updatePost($_POST['title'], $_POST['content'], $_GET['id']);
+        } elseif ($_GET['action'] == 'deletepost') {
+            deletePost($_GET['id']);
+        } elseif ($_GET['action'] == 'deletecomment') {
+            deleteComment($_GET['id']);
         }
     }
     else {
