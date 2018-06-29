@@ -1,7 +1,6 @@
 <?php ob_start(); ?>
-<h1>Mon super blog !</h1>
-<p>Derniers billets du blog :</p>
-<p><a href="index.php?action=newpost">Ajouter nouvel article</a></p>
+<a id="contentaction" href="index.php?action=newpost">Ajouter nouvel article</a>
+<p>Dernières publications :</p>
 <?php
 while ($data = $posts->fetch())
 {
@@ -15,7 +14,7 @@ while ($data = $posts->fetch())
         <p>
             <?= nl2br(htmlspecialchars(substr($data['content'], 0, 100) . '...')) ?>
             <br />
-            <em><a href="index.php?action=editpost&amp;id=<?= $data['id'] ?>">Editer cet article.</a></em>
+            <em><a href="index.php?action=editpost&amp;id=<?= $data['id'] ?>"><i class="fas fa-edit"></i> Editer cet article</a></em>
         </p>
     </div>
 <?php
@@ -29,11 +28,12 @@ while ($comment = $alerts->fetch())
 ?>
     <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date_fr'] ?></p>
     <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
-    <a href="index.php?action=checkcomment&amp;postid=<?= $post['id'] ?>&amp;commentid=<?= $comment['id'] ?>">Valider ce commentaire.</a>
-    <a href="index.php?action=deletecomment&amp;id=<?= $comment['id'] ?>">Supprimer l'article</a>
+    <a href="index.php?action=checkcomment&amp;postid=<?= $post['id'] ?>&amp;commentid=<?= $comment['id'] ?>">Valider le commentaire</a>
+    <a href="index.php?action=deletecomment&amp;id=<?= $comment['id'] ?>">Supprimer le commentaire</a>
 <?php
 }
 ?>
 <?php $content = ob_get_clean(); ?>
 
+<?php require('view/frontend/adminheader.php'); ?>
 <?php require('template.php'); ?>

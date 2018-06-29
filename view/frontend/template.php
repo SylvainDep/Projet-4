@@ -3,10 +3,22 @@
     <head>
         <meta charset="utf-8" />
         <title><?= $title ?></title>
-        <link href="public/css/style.css" rel="stylesheet" /> 
+        <link href="public/css/style.css" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Lato|Raleway" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     </head>
         
     <body>
-        <?= $content ?>
+        <header>
+            <?= $header ?>
+        </header>
+
+        <div id="hero">
+            <h1>Jean Forteroche<br/>Billet simple pour l'Alaska</h1>
+        </div>
+
+        <div id="content">
+            <?= $content ?>
+        </div>
     </body>
 </html>

@@ -1,27 +1,96 @@
-h1, h3
-{
-    text-align:center;
-}
-h3
-{
-    background-color:black;
-    color:white;
-    font-size:0.9em;
-    margin-bottom:0px;
-}
-.news p
-{
-    background-color:#CCCCCC;
-    margin-top:0px;
-}
-.news
-{
-    width:70%;
-    margin:auto;
+body {
+    margin: 0;
+    background-color: #F9F9F4;
 }
 
-a
-{
-    text-decoration: none;
-    color: blue;
+strong {
+    font-weight: bold;
 }
+
+#hero {
+    background: #ffffff url("/public/images/sebastian-engler-65104-unsplash.jpg") no-repeat right top;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 200px;
+}
+
+#content {
+    width: 1180px;
+    margin: auto;
+    max-width: 100%;
+}
+
+h1, h2, h3 {
+    text-align:center;
+    font-family: 'Lato', sans-serif;
+}
+
+h3 {
+    color: white;
+}
+
+p, label, a, input[type=submit] {
+    font-family: 'Raleway', sans-serif;
+}
+
+#contentaction {
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    background-color: #004056;
+    text-decoration: none;
+    margin: 40px 0px;
+}
+
+input[type=submit] {
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    background-color: #004056;
+    text-decoration: none;
+    border-width: 0;
+}
+
+/* BLOG LIST */
+
+.news {
+    margin-bottom: 30px;
+}
+
+.news h3 {
+    background-color: #2C858D;
+    margin: 0;
+    padding: 10px;
+}
+
+.news p {
+    background-color: #74CEB7;
+    margin: 0;
+    padding: 10px;
+}
+
+.news p > em {
+    display: inline-block;
+    margin-top: 15px;
+}
+
+.news p > em > a {
+    color: white;
+    text-decoration: none;
+}
+
+/* TINY EDITOR */
+
+.mce-widget {
+    display: none;
+}
+
+#texteditor > label {
+    display: inline-block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+

@@ -43,4 +43,5 @@ while ($comment = $comments->fetch())
 ?>
 <?php $content = ob_get_clean(); ?>
 
+<?php require('view/frontend/header.php'); ?>
 <?php require('template.php'); ?>

@@ -9,7 +9,7 @@ function listPosts()
     $postManager = new \Blog\Model\PostManager();
     $posts = $postManager->getPosts();
 
-    require('view/frontend/header.php');
+
     require('view/frontend/listPostsView.php');
 }
 
@@ -21,7 +21,6 @@ function post()
     $post = $postManager->getPost($_GET['id']);
     $comments = $commentManager->getComments($_GET['id']);
 
-    require('view/frontend/header.php');
     require('view/frontend/postView.php');
 }
 
@@ -41,7 +40,6 @@ function addComment($postId, $author, $comment)
 
 function loginAccess()
 {
-  require('view/frontend/header.php');
   require('view/frontend/login.php');
 }
 
@@ -53,7 +51,6 @@ function adminBoard()
   $posts = $postManager->getPosts();
   $alerts = $commentManager->getAlertComments();
 
-  require('view/frontend/adminheader.php');
   require('view/frontend/homeadmin.php');
 }
 
@@ -81,7 +78,6 @@ function checkComment($post, $alertcomment)
 
 function newPost()
 {
-    require('view/frontend/adminheader.php');
     require('view/frontend/newpost.php');
 }
 
@@ -91,7 +87,6 @@ function editPost()
 
     $post = $postManager->getPost($_GET['id']);
 
-    require('view/frontend/adminheader.php');
     require('view/frontend/editpost.php');
 }
 

@@ -1,8 +1,7 @@
 <?php $title = 'Mon blog'; ?>
 
 <?php ob_start(); ?>
-<h1>Mon super blog !</h1>
-<p>Derniers billets du blog :</p>
+<h2>Dernières publications</h2>
 
 
 <?php
@@ -16,8 +15,9 @@ while ($data = $posts->fetch())
         </h3>
 
         <p>
-            <?= nl2br(htmlspecialchars(substr($data['content'], 0, 100) . '...')) ?>
+            <?= nl2br(htmlspecialchars(substr($data['content'], 0, 500) . '...')) ?>
             <br />
+            <br/>
             <em><a href="index.php?action=post&amp;id=<?= $data['id'] ?>">Commentaires</a></em>
         </p>
     </div>
@@ -27,4 +27,5 @@ $posts->closeCursor();
 ?>
 <?php $content = ob_get_clean(); ?>
 
+<?php require('view/frontend/header.php'); ?>
 <?php require('template.php'); ?>
