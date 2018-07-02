@@ -15,10 +15,10 @@ while ($data = $posts->fetch())
         </h3>
 
         <p>
-            <?= nl2br(htmlspecialchars(substr($data['content'], 0, 500) . '...')) ?>
+            <?= nl2br(htmlspecialchars(substr(strip_tags(html_entity_decode($data['content'])), 0, 500) . '...')) ?>
             <br />
             <br/>
-            <em><a href="index.php?action=post&amp;id=<?= $data['id'] ?>">Commentaires</a></em>
+            <em><a href="index.php?action=post&amp;id=<?= $data['id'] ?>">Lire la suite</a></em>
         </p>
     </div>
 <?php

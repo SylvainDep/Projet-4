@@ -12,7 +12,7 @@ while ($data = $posts->fetch())
         </h3>
 
         <p>
-            <?= nl2br(htmlspecialchars(substr($data['content'], 0, 100) . '...')) ?>
+            <?= nl2br(htmlspecialchars(substr(strip_tags(html_entity_decode($data['content'])), 0, 500) . '...')) ?>
             <br />
             <em><a href="index.php?action=editpost&amp;id=<?= $data['id'] ?>"><i class="fas fa-edit"></i> Editer cet article</a></em>
         </p>
@@ -22,14 +22,16 @@ while ($data = $posts->fetch())
 $posts->closeCursor();
 ?>
 
+<h2>Commentaires signalés</h2>
+
 <?php
 while ($comment = $alerts->fetch())
 {
 ?>
     <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date_fr'] ?></p>
     <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
-    <a href="index.php?action=checkcomment&amp;postid=<?= $post['id'] ?>&amp;commentid=<?= $comment['id'] ?>">Valider le commentaire</a>
-    <a href="index.php?action=deletecomment&amp;id=<?= $comment['id'] ?>">Supprimer le commentaire</a>
+    <a id="checkbutton" href="index.php?action=checkcomment&amp;postid=<?= $post['id'] ?>&amp;commentid=<?= $comment['id'] ?>">Valider le commentaire</a>
+    <a id="deletebutton" href="index.php?action=deletecomment&amp;id=<?= $comment['id'] ?>">Supprimer le commentaire</a>
 <?php
 }
 ?>

@@ -3,6 +3,21 @@ body {
     background-color: #F9F9F4;
 }
 
+header {
+    display: flex;
+    height: 50px;
+    align-items: center;
+}
+
+header a {
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+    background-color: #2C858D;
+    margin-left: 20px;
+    border-radius: 5px;
+}
+
 strong {
     font-weight: bold;
 }
@@ -21,6 +36,7 @@ strong {
     width: 1180px;
     margin: auto;
     max-width: 100%;
+    padding: 20px 10px;
 }
 
 h1, h2, h3 {
@@ -45,13 +61,76 @@ p, label, a, input[type=submit] {
     margin: 40px 0px;
 }
 
+#signalbutton {
+    padding: 5px 10px;
+    color: white;
+    background-color: #E83A37;
+    text-decoration: none;
+}
+
+#deletebutton {
+    padding: 10px 20px;
+    color: white;
+    background-color: #E83A37;
+    text-decoration: none;
+    display: inline-block;
+}
+
+#checkbutton {
+    padding: 10px 20px;
+    color: white;
+    background-color: green;
+    text-decoration: none;
+    margin-bottom: 50px;
+}
+
 input[type=submit] {
     display: inline-block;
     padding: 10px 20px;
     color: white;
+    font-size: 1em;
     background-color: #004056;
     text-decoration: none;
     border-width: 0;
+}
+
+/* COMMENT AREA */
+
+#commentarea {
+    width: 600px;
+    max-width: 100%;
+    margin: auto;
+}
+
+#commentarea form {
+    margin-bottom: 20px;
+}
+
+#commentarea label {
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 2px;
+}
+
+#commentarea input[type=text] {
+    width: 150px;
+    border: 1px solid grey;
+    font-size: 1em;
+    padding: 2px;
+}
+
+#commentarea textarea {
+    width: 300px;
+    max-width: 100%;
+    height: 100px;
+    font-size: 1em;
+    padding: 2px;
+}
+
+.commentblock {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 /* BLOG LIST */
@@ -84,6 +163,14 @@ input[type=submit] {
 
 /* TINY EDITOR */
 
+#texteditor {
+    margin-bottom: 30px;
+}
+
+#blogbody_ifr {
+    height: 500px!important;
+}
+
 .mce-widget {
     display: none;
 }
@@ -92,5 +179,12 @@ input[type=submit] {
     display: inline-block;
     margin-top: 15px;
     margin-bottom: 5px;
+}
+
+#texteditor > input[type=text] {
+    width: 400px;
+    font-size: 1.5em;
+    padding: 0.2em;
+    max-width: 100%;
 }
 

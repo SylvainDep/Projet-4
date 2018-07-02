@@ -8,7 +8,7 @@
     <br/>
     <input type="submit"/>
 </form>
-<a href="index.php?action=deletepost&amp;id=<?= $post['id'] ?>">Supprimer l'article</a>
+<a id="deletebutton" href="index.php?action=deletepost&amp;id=<?= $post['id'] ?>">Supprimer l'article</a>
 <?php $content = ob_get_clean(); ?>
 
 <?php require('view/frontend/adminheader.php'); ?>

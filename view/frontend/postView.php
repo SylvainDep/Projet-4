@@ -11,36 +11,42 @@
     </h3>
 
     <p>
-        <?= nl2br(htmlspecialchars($post['content'])) ?>
+        <?= nl2br(htmlspecialchars(substr(strip_tags(html_entity_decode($post['content'])), 0, 500) . '...')) ?>
     </p>
 </div>
 
 <h2>Commentaires</h2>
 
-<form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="post">
-    <div>
-        <label for="author">Auteur</label><br />
-        <input type="text" id="author" name="author" />
-    </div>
-    <div>
-        <label for="comment">Commentaire</label><br />
-        <textarea id="comment" name="comment"></textarea>
-    </div>
-    <div>
-        <input type="submit" />
-    </div>
-</form>
+<div id="commentarea">
+    <form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="post">
+        <div>
+            <label for="author">Auteur</label><br />
+            <input type="text" id="author" name="author" />
+        </div>
+        <div>
+            <label for="comment">Commentaire</label><br />
+            <textarea id="comment" name="comment"></textarea>
+        </div>
+        <div>
+            <input type="submit" />
+        </div>
+    </form>
 
-<?php
-while ($comment = $comments->fetch())
-{
-?>
-    <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date_fr'] ?></p>
-    <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
-    <a href="index.php?action=doalert&amp;postid=<?= $post['id'] ?>&amp;commentid=<?= $comment['id'] ?>">Signaler</a>
-<?php
-}
-?>
+    <?php
+    while ($comment = $comments->fetch())
+    {
+    ?>
+        <div class="commentblock">
+            <div class="commententry">
+                <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date_fr'] ?></p>
+                <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
+            </div>
+            <a  id="signalbutton" href="index.php?action=doalert&amp;postid=<?= $post['id'] ?>&amp;commentid=<?= $comment['id'] ?>">Signaler</a>
+        </div>
+    <?php
+    }
+    ?>
+</div>
 <?php $content = ob_get_clean(); ?>
 
 <?php require('view/frontend/header.php'); ?>
