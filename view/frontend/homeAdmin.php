@@ -1,3 +1,5 @@
+<?php $title = 'Administration du site'; ?>
+
 <?php ob_start(); ?>
 <a id="contentaction" href="index.php?action=newpost">Ajouter nouvel article</a>
 <p>Dernières publications :</p>

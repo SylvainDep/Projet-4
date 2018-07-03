@@ -3,6 +3,7 @@
 // Chargement des classes
 require_once('model/PostManager.php');
 require_once('model/CommentManager.php');
+require_once('model/AdminManager.php');
 
 function listPosts()
 {
@@ -143,5 +144,24 @@ function deleteComment($commentId)
     }
     else {
         header('Location: index.php?action=homeadmin');
+    }
+}
+
+function checkpassword($userPassword)
+{
+    $AdminManager = new \Blog\Model\AdminManager();
+
+    $resultat = $AdminManager->getPassword();
+
+    $isPasswordCorrect = password_verify($userPassword, $resultat['password']);
+
+    if (!$resultat) {
+        echo 'héhé !';
+    } else {
+        if ($isPasswordCorrect) {
+            adminBoard();
+        } else {
+            echo 'Mauvais identifiant ou mot de passe !';
+        }
     }
 }

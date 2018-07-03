@@ -1,3 +1,5 @@
+<?php $title = 'Connexion'; ?>
+
 <?php ob_start(); ?>
 <p><strong>Connexion</strong></p>
 <form id="loginbox" method="post" action="index.php?action=homeadmin">

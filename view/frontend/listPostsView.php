@@ -1,4 +1,4 @@
-<?php $title = 'Mon blog'; ?>
+<?php $title = 'Jean Forteroche - Billet simple pour l\'Alaska'; ?>
 
 <?php ob_start(); ?>
 <h2>Dernières publications</h2>

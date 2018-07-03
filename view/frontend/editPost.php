@@ -1,3 +1,5 @@
+<?php $title = 'Edition de l\'article - ' . htmlspecialchars($post['title']); ?>
+
 <?php ob_start(); ?>
 <form id="texteditor" method="post" action="index.php?action=updatepost&amp;id=<?= $post['id'] ?>" >
     <label>Titre</label><br/>

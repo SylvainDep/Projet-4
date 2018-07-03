@@ -1,5 +1,9 @@
 <?php
-require('controller/frontend.php');
+
+session_start();
+
+require 'config.php';
+require 'controller/frontend.php';
 
 try {
     if (isset($_GET['action'])) {
@@ -27,11 +31,11 @@ try {
         } elseif ($_GET['action'] == 'login') {
             loginAccess();
         } elseif ($_GET['action'] == 'homeadmin') {
-            adminBoard();
+            checkpassword($_POST['password']);
         } elseif ($_GET['action'] == 'doalert') {
             doAlert($_GET['postid'], $_GET['commentid']);
         } elseif ($_GET['action'] == 'checkcomment') {
-            checkComment($_GET['postid'], $_GET['commentid']);
+            checkComment($_POST['postid'], $_GET['commentid']);
         } elseif ($_GET['action'] == 'newpost') {
             newPost();
         } elseif ($_GET['action'] == 'addpost') {
