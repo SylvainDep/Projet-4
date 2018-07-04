@@ -2,7 +2,7 @@
 
 session_start();
 
-require 'config.php';
+require 'debug.php';
 require 'controller/frontend.php';
 
 try {
@@ -31,7 +31,11 @@ try {
         } elseif ($_GET['action'] == 'login') {
             loginAccess();
         } elseif ($_GET['action'] == 'homeadmin') {
-            checkpassword($_POST['password']);
+            if ($_SESSION['admin']) {
+                adminBoard();
+            } else {
+                checkpassword($_POST['password']);
+            }
         } elseif ($_GET['action'] == 'doalert') {
             doAlert($_GET['postid'], $_GET['commentid']);
         } elseif ($_GET['action'] == 'checkcomment') {
@@ -48,6 +52,8 @@ try {
             deletePost($_GET['id']);
         } elseif ($_GET['action'] == 'deletecomment') {
             deleteComment($_GET['id']);
+        } elseif ($_GET['action'] == 'logout') {
+            logOut();
         }
     }
     else {

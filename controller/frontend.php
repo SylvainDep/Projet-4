@@ -159,9 +159,17 @@ function checkpassword($userPassword)
         echo 'héhé !';
     } else {
         if ($isPasswordCorrect) {
+            $_SESSION['admin'] = 'Jean';
             adminBoard();
         } else {
             echo 'Mauvais identifiant ou mot de passe !';
         }
     }
+}
+
+function logOut()
+{
+    session_destroy();
+
+    require('view/frontend/logout.php');
 }
