@@ -1,17 +1,22 @@
 <?php
 
 session_start();
+echo $_SESSION['admin'];
 
 require 'debug.php';
-require 'controller/frontend.php';
+require 'controller/Front.php';
+require 'controller/Back.php';
+
+$frontcontroller = new \Blog\Controller\frontController();
+$backcontroller = new \Blog\Controller\backController();
 
 try {
     if (isset($_GET['action'])) {
         if ($_GET['action'] == 'listPosts') {
-            listPosts();
+            $frontcontroller->listPosts();
         } elseif ($_GET['action'] == 'post') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                post();
+                $frontcontroller->post();
             }
             else {
                 throw new Exception('Aucun identifiant de billet envoyé');
@@ -19,7 +24,7 @@ try {
         } elseif ($_GET['action'] == 'addComment') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 if (!empty($_POST['author']) && !empty($_POST['comment'])) {
-                    addComment($_GET['id'], $_POST['author'], $_POST['comment']);
+                    $frontcontroller->addComment($_GET['id'], $_POST['author'], $_POST['comment']);
                 }
                 else {
                     throw new Exception('Tous les champs ne sont pas remplis !');
@@ -29,35 +34,90 @@ try {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
         } elseif ($_GET['action'] == 'login') {
-            loginAccess();
-        } elseif ($_GET['action'] == 'homeadmin') {
-            if ($_SESSION['admin']) {
-                adminBoard();
+            if (isset($_SESSION['admin'])) {
+                $backcontroller->adminBoard();
             } else {
-                checkpassword($_POST['password']);
+                $frontcontroller->loginAccess();
+            }
+        } elseif ($_GET['action'] == 'homeadmin') {
+            if (isset($_SESSION['admin'])) {
+                $backcontroller->adminBoard();
+            } else {
+                $backcontroller->checkpassword($_POST['password']);
             }
         } elseif ($_GET['action'] == 'doalert') {
-            doAlert($_GET['postid'], $_GET['commentid']);
+            if (isset($_GET['postid']) && $_GET['postid'] > 0 && isset($_GET['commentid']) && $_GET['commentid'] > 0) {
+                $frontcontroller->doAlert($_GET['postid'], $_GET['commentid']);
+            } else {
+                throw new Exception('Le commentaire ou l\'article n\'ont pu être identifié');
+            }
         } elseif ($_GET['action'] == 'checkcomment') {
-            checkComment($_POST['postid'], $_GET['commentid']);
+            if ($_SESSION['admin'] == 'Jean') {
+                if (isset($_GET['commentid']) && $_GET['commentid'] > 0) {
+                    $backcontroller->checkComment($_GET['commentid']);
+                } else {
+                    throw new Exception('Le commentaire ou l\'article n\'ont pu être identifié');
+                }
+            } else {
+                $backcontroller->logOut();
+            }
         } elseif ($_GET['action'] == 'newpost') {
-            newPost();
+            if ($_SESSION['admin'] == 'Jean') {
+                $backcontroller->newPost();
+            } else {
+                $backcontroller->logOut();
+            }
         } elseif ($_GET['action'] == 'addpost') {
-            addPost($_POST['title'], $_POST['content']);
+            if ($_SESSION['admin'] == 'Jean') {
+                if (!empty($_POST['title']) OR !empty($_POST['content'])) {
+                    $backcontroller->addPost($_POST['title'], $_POST['content']);
+                } else {
+                    throw new Exception('Veuillez indiquer un titre et un contenu pour l\'article');
+                }
+            } else {
+                $backcontroller->logOut();
+            }
         } elseif ($_GET['action'] == 'editpost') {
-            editPost();
+            if ($_SESSION['admin'] == 'Jean') {
+                $backcontroller->editPost();
+            } else {
+                $backcontroller->logOut();
+            }
         } elseif ($_GET['action'] == 'updatepost') {
-            updatePost($_POST['title'], $_POST['content'], $_GET['id']);
+            if ($_SESSION['admin'] == 'Jean') {
+                if (!empty($_POST['title']) OR !empty($_POST['content'])) {
+                    $backcontroller->updatePost($_POST['title'], $_POST['content'], $_GET['id']);
+                } else {
+                    throw new Exception('Veuillez indiquer un titre et un contenu pour l\'article');
+                }
+            } else {
+                $backcontroller->logOut();
+            }
         } elseif ($_GET['action'] == 'deletepost') {
-            deletePost($_GET['id']);
+            if ($_SESSION['admin'] == 'Jean') {
+                if (isset($_GET['id']) && $_GET['id'] > 0) {
+                    $backcontroller->deletePost($_GET['id']);
+                } else {
+                    throw new Exception('Veuillez indiquer un titre et un contenu pour l\'article');
+                }
+            } else {
+                $backcontroller->logOut();
+            }
         } elseif ($_GET['action'] == 'deletecomment') {
-            deleteComment($_GET['id']);
+            if ($_SESSION['admin'] == 'Jean') {
+                if (isset($_GET['id']) && $_GET['id'] > 0) {
+                    $backcontroller->deleteComment($_GET['id']);
+                } else {
+                    throw new Exception('Veuillez indiquer un titre et un contenu pour l\'article');
+                }
+            } else {
+                $backcontroller->logOut();
+            }
         } elseif ($_GET['action'] == 'logout') {
-            logOut();
+            $backcontroller->logOut();
         }
-    }
-    else {
-        listPosts();
+    } else {
+        $frontcontroller->listPosts();
     }
 }
 catch(Exception $e) {

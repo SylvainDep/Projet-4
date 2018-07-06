@@ -66,13 +66,13 @@ function doAlert($post, $alertcomment)
     header('Location: index.php?action=post&id=' . $post);
 }
 
-function checkComment($post, $alertcomment)
+function checkComment($alertcomment)
 {
     $postManager = new \Blog\Model\PostManager();
     $commentManager = new \Blog\Model\CommentManager();
 
     $post = $_GET['postid'];
-    $commentManager->removeAlert($_GET['commentid']);
+    $commentManager->removeAlert($alertcomment);
 
     header('Location: index.php?action=homeadmin');
 }
@@ -156,20 +156,22 @@ function checkpassword($userPassword)
     $isPasswordCorrect = password_verify($userPassword, $resultat['password']);
 
     if (!$resultat) {
-        echo 'héhé !';
+        echo 'Le service est temporairement indisponible, veuillez réessayer plus tard';
     } else {
         if ($isPasswordCorrect) {
             $_SESSION['admin'] = 'Jean';
             adminBoard();
         } else {
-            echo 'Mauvais identifiant ou mot de passe !';
+            echo 'Mauvais identifiant ou mot de passe ! 
+            <a href="index.php">Revenir à l\'accueil</a>
+            <a href="index.php?action=login">Connexion</a>';
         }
     }
 }
 
 function logOut()
 {
-    session_destroy();
+    $_SESSION = array();
 
     require('view/frontend/logout.php');
 }

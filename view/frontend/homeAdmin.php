@@ -32,7 +32,7 @@ while ($comment = $alerts->fetch())
 ?>
     <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date_fr'] ?></p>
     <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
-    <a id="checkbutton" href="index.php?action=checkcomment&amp;postid=<?= $post['id'] ?>&amp;commentid=<?= $comment['id'] ?>">Valider le commentaire</a>
+    <a id="checkbutton" href="index.php?action=checkcomment&amp;commentid=<?= $comment['id'] ?>">Valider le commentaire</a>
     <a id="deletebutton" href="index.php?action=deletecomment&amp;id=<?= $comment['id'] ?>">Supprimer le commentaire</a>
 <?php
 }

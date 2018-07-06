@@ -1,7 +1,7 @@
 <?php $title = 'Nouvel Article'; ?>
 
 <?php ob_start(); ?>
-<form id="texteditor" method="post" action="index.php?action=addpost&amp;id=<?= $post['id'] ?>">
+<form id="texteditor" method="post" action="index.php?action=addpost">
     <label>Titre</label><br/>
     <input type="text" name="title"/>
     <br/>
