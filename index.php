@@ -19,7 +19,8 @@ try {
                 $frontcontroller->post();
             }
             else {
-                throw new Exception('Aucun identifiant de billet envoyé');
+                throw new Exception('Aucun identifiant de billet envoyé.<br/>
+                <a href="index.php">Revenir à l\'accueil</a>');
             }
         } elseif ($_GET['action'] == 'addComment') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
@@ -27,11 +28,13 @@ try {
                     $frontcontroller->addComment($_GET['id'], $_POST['author'], $_POST['comment']);
                 }
                 else {
-                    throw new Exception('Tous les champs ne sont pas remplis !');
+                    throw new Exception('Tous les champs ne sont pas remplis.<br/>
+                    <a href="index.php">Revenir à l\'accueil</a>');
                 }
             }
             else {
-                throw new Exception('Aucun identifiant de billet envoyé');
+                throw new Exception('Aucun identifiant de billet envoyé.<br/>
+                    <a href="index.php">Revenir à l\'accueil</a>');
             }
         } elseif ($_GET['action'] == 'login') {
             if (isset($_SESSION['admin'])) {
@@ -43,7 +46,7 @@ try {
             if (isset($_SESSION['admin'])) {
                 $backcontroller->adminBoard();
             } else {
-                $backcontroller->checkpassword($_POST['password']);
+                $backcontroller->checkpassword($_POST['password'], $_POST['pseudo']);
             }
         } elseif ($_GET['action'] == 'doalert') {
             if (isset($_GET['postid']) && $_GET['postid'] > 0 && isset($_GET['commentid']) && $_GET['commentid'] > 0) {
@@ -107,6 +110,16 @@ try {
             if ($_SESSION['admin'] == 'Jean') {
                 if (isset($_GET['id']) && $_GET['id'] > 0) {
                     $backcontroller->deleteComment($_GET['id']);
+                } else {
+                    throw new Exception('Veuillez indiquer un titre et un contenu pour l\'article');
+                }
+            } else {
+                $backcontroller->logOut();
+            }
+        } elseif ($_GET['action'] == 'deletepostcomment') {
+            if ($_SESSION['admin'] == 'Jean') {
+                if (isset($_GET['id']) && $_GET['id'] > 0) {
+                    $backcontroller->deletePostComment($_GET['id'], $_GET['postid']);
                 } else {
                     throw new Exception('Veuillez indiquer un titre et un contenu pour l\'article');
                 }

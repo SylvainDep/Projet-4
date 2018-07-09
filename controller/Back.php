@@ -38,8 +38,10 @@ class backController
     public function editPost()
     {
         $postManager = new \Blog\Model\PostManager();
+        $commentManager = new \Blog\Model\CommentManager();
 
         $post = $postManager->getPost($_GET['id']);
+        $comments = $commentManager->getComments($_GET['id']);
 
         require('view/frontend/editpost.php');
     }
@@ -96,18 +98,37 @@ class backController
         }
     }
 
-    public function checkpassword($userPassword)
+    public function deletePostComment($commentId, $postId)
+    {
+        $commentManager = new \Blog\Model\CommentManager();
+
+        $affectedLines = $commentManager->removeComment($commentId);
+
+        if ($affectedLines === false) {
+            throw new Exception('Impossible d\'ajouter l\'article !');
+        } else {
+            header('Location: index.php?action=editpost&id=' . $postId);
+        }
+    }
+
+    public function checkpassword($userPassword, $userId)
     {
         $AdminManager = new \Blog\Model\AdminManager();
 
-        $resultat = $AdminManager->getPassword();
+        $resultat = $AdminManager->getCredentials();
 
         $isPasswordCorrect = password_verify($userPassword, $resultat['password']);
+
+        if($userId == $resultat['user']) {
+            $isIdCorrect = true;
+        } else {
+            $isIdCorrect = false;
+        }
 
         if (!$resultat) {
             echo 'Le service est temporairement indisponible, veuillez réessayer plus tard';
         } else {
-            if ($isPasswordCorrect) {
+            if ($isPasswordCorrect AND $isIdCorrect) {
                 $_SESSION['admin'] = 'Jean';
                 $this->adminBoard();
             } else {
