@@ -54,6 +54,6 @@ class frontController
         $post = $_GET['postid'];
         $commentManager->setAlert($_GET['commentid']);
 
-        header('Location: index.php?action=post&id=' . $post);
+        header('Location: index.php?action=post&origin=commentalert&id=' . $post);
     }
 }

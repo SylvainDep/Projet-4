@@ -1,6 +1,10 @@
 <?php $title = htmlspecialchars($post['title']); ?>
 
 <?php ob_start(); ?>
+<?php if($_GET['origin'] == 'commentalert') {
+    echo '<p id="confirmationmodalcontainer">Le commentaire a bien été signalé</p>';
+} ?>
+
 <h1>Mon super blog !</h1>
 <p><a href="index.php">Retour à la liste des billets</a></p>
 
@@ -41,7 +45,10 @@
                 <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date_fr'] ?></p>
                 <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
             </div>
-            <a  id="signalbutton" href="index.php?action=doalert&amp;postid=<?= $post['id'] ?>&amp;commentid=<?= $comment['id'] ?>">Signaler</a>
+            <div class="signalcontainer">
+                <button  class="first_step_signal" id="<?= $comment['id'] ?>" onclick="document.getElementById('<?= $comment['id'] ?>').style.display='none'">Signaler</button>
+                <a  id="signalbutton" href="index.php?action=doalert&amp;postid=<?= $post['id'] ?>&amp;commentid=<?= $comment['id'] ?>">Confirmer</a>
+            </div>
         </div>
     <?php
     }

@@ -3,6 +3,10 @@ body {
     background-color: #F9F9F4;
 }
 
+body, body * {
+    box-sizing: border-box;
+}
+
 header {
     display: flex;
     height: 50px;
@@ -61,11 +65,51 @@ p, label, a, input[type=submit] {
     margin: 40px 0px;
 }
 
+.signalcontainer {
+    position: relative;
+    display: flex;
+}
+
+.first_step_signal {
+    padding: 5px 10px;
+    color: white;
+    background-color: rgb(232, 58, 55);
+    text-decoration: none;
+    font-size: 1em;
+    font-family: Raleway;
+    border-width: 0px;
+    position: absolute;
+    width: 100%;
+}
+
 #signalbutton {
     padding: 5px 10px;
     color: white;
     background-color: #E83A37;
     text-decoration: none;
+}
+
+@keyframes disappear {
+    0%   {opacity: 1;}
+    95%  {opacity: 1;}
+    100%  {opacity: 0;}
+}
+
+#confirmationmodalcontainer {
+    display: block;
+    margin: 0;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background-color: green;
+    color: white;
+    padding: 15px 30px;
+    animation-name: disappear;
+    -webkit-animation-duration: 5s;
+    -moz-animation-duration: 5s;
+    -o-animation-duration: 5s;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
 }
 
 #deletebutton {
