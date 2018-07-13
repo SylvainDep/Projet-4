@@ -54,7 +54,7 @@ class Router
                         throw new Exception('Le commentaire ou l\'article n\'ont pu être identifié<br/><a href="javascript:history.back()">Revenir à l\'article</a>');
                     }
                 } elseif ($_GET['action'] == 'checkcomment') {
-                    if ($_SESSION['admin'] == 'Jean') {
+                    if (isset($_SESSION['admin']) && $_SESSION['admin'] == 'Jean') {
                         if (isset($_GET['commentid']) && $_GET['commentid'] > 0) {
                             $backcontroller->checkComment($_GET['commentid']);
                         } else {
@@ -64,13 +64,13 @@ class Router
                         $backcontroller->logOut();
                     }
                 } elseif ($_GET['action'] == 'newpost') {
-                    if ($_SESSION['admin'] == 'Jean') {
+                    if (isset($_SESSION['admin']) && $_SESSION['admin'] == 'Jean') {
                         $backcontroller->newPost();
                     } else {
                         $backcontroller->logOut();
                     }
                 } elseif ($_GET['action'] == 'addpost') {
-                    if ($_SESSION['admin'] == 'Jean') {
+                    if (isset($_SESSION['admin']) && $_SESSION['admin'] == 'Jean') {
                         if (!empty($_POST['title']) OR !empty($_POST['content'])) {
                             $backcontroller->addPost($_POST['title'], $_POST['content']);
                         } else {
@@ -80,13 +80,13 @@ class Router
                         $backcontroller->logOut();
                     }
                 } elseif ($_GET['action'] == 'editpost') {
-                    if ($_SESSION['admin'] == 'Jean') {
+                    if (isset($_SESSION['admin']) && $_SESSION['admin'] == 'Jean') {
                         $backcontroller->editPost();
                     } else {
                         $backcontroller->logOut();
                     }
                 } elseif ($_GET['action'] == 'updatepost') {
-                    if ($_SESSION['admin'] == 'Jean') {
+                    if (isset($_SESSION['admin']) && $_SESSION['admin'] == 'Jean') {
                         if (!empty($_POST['title']) OR !empty($_POST['content'])) {
                             $backcontroller->updatePost($_POST['title'], $_POST['content'], $_GET['id']);
                         } else {
@@ -96,7 +96,7 @@ class Router
                         $backcontroller->logOut();
                     }
                 } elseif ($_GET['action'] == 'deletepost') {
-                    if ($_SESSION['admin'] == 'Jean') {
+                    if (isset($_SESSION['admin']) && $_SESSION['admin'] == 'Jean') {
                         if (isset($_GET['id']) && $_GET['id'] > 0) {
                             $backcontroller->deletePost($_GET['id']);
                         } else {
@@ -106,7 +106,7 @@ class Router
                         $backcontroller->logOut();
                     }
                 } elseif ($_GET['action'] == 'deletecomment') {
-                    if ($_SESSION['admin'] == 'Jean') {
+                    if (isset($_SESSION['admin']) && $_SESSION['admin'] == 'Jean') {
                         if (isset($_GET['id']) && $_GET['id'] > 0) {
                             $backcontroller->deleteComment($_GET['id']);
                         } else {
@@ -116,7 +116,7 @@ class Router
                         $backcontroller->logOut();
                     }
                 } elseif ($_GET['action'] == 'deletepostcomment') {
-                    if ($_SESSION['admin'] == 'Jean') {
+                    if (isset($_SESSION['admin']) && $_SESSION['admin'] == 'Jean') {
                         if (isset($_GET['id']) && $_GET['id'] > 0) {
                             $backcontroller->deletePostComment($_GET['id'], $_GET['postid']);
                         } else {
