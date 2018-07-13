@@ -1,6 +1,12 @@
 <?php $title = 'Edition de l\'article - ' . htmlspecialchars($post['title']); ?>
 
 <?php ob_start(); ?>
+<?php
+if(!empty($_GET['origin']) && $_GET['origin'] == 'deletecomment') {
+    echo '<p id="confirmationmodalcontainer">Le commentaire a bien été supprimé</p>';
+}
+?>
+
 <form id="texteditor" method="post" action="index.php?action=updatepost&amp;id=<?= $post['id'] ?>" >
     <label>Titre</label><br/>
     <input type="text" name="title" value="<?= $post['title'] ?>"/>
@@ -10,7 +16,10 @@
     <br/>
     <input type="submit"/>
 </form>
-<a id="deletebutton" href="index.php?action=deletepost&amp;id=<?= $post['id'] ?>">Supprimer l'article</a>
+<div id="deletepostcontainer">
+    <button id="first_step_deletecomment" onclick="document.getElementById('first_step_deletecomment').style.display='none'">Supprimer l'article</button>
+    <a id="deletebutton" href="index.php?action=deletepost&amp;id=<?= $post['id'] ?>">Confirmer</a>
+</div>
 
 <?php
 while ($comment = $comments->fetch())
@@ -21,7 +30,10 @@ while ($comment = $comments->fetch())
             <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date_fr'] ?></p>
             <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
         </div>
-        <a id="deletebutton" href="index.php?action=deletepostcomment&amp;id=<?= $comment['id'] ?>&amp;postid=<?= $post['id'] ?>">Supprimer le commentaire</a>
+        <div class="deletecontainer">
+            <button  class="first_step_deletecomment" id="<?= $comment['id'] ?>" onclick="document.getElementById('<?= $comment['id'] ?>').style.display='none'">Supprimer</button>
+            <a id="deletebutton" href="index.php?action=deletepostcomment&amp;id=<?= $comment['id'] ?>&postid=<?= $post['id'] ?>">Confirmer</a>
+        </div>
     </div>
     <?php
 }

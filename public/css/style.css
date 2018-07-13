@@ -80,6 +80,7 @@ p, label, a, input[type=submit] {
     border-width: 0px;
     position: absolute;
     width: 100%;
+    cursor: pointer;
 }
 
 #signalbutton {
@@ -90,8 +91,9 @@ p, label, a, input[type=submit] {
 }
 
 @keyframes disappear {
-    0%   {opacity: 1;}
-    95%  {opacity: 1;}
+    0%   {opacity: 0;}
+    15%  {opacity: 1;}
+    85%  {opacity: 1;}
     100%  {opacity: 0;}
 }
 
@@ -111,6 +113,37 @@ p, label, a, input[type=submit] {
     animation-duration: 5s;
     animation-fill-mode: forwards;
 }
+
+.deletecontainer {
+    position: relative;
+    display: inline-block;
+}
+
+.first_step_deletecomment {
+    padding: 10px 20px;
+    color: white;
+    background-color: rgb(232, 58, 55);
+    text-decoration: none;
+    font-size: 1em;
+    font-family: Raleway;
+    border-width: 0px;
+    position: absolute;
+    width: 100%;
+    cursor: pointer;
+}
+
+#first_step_deletecomment {
+    padding: 10px 20px;
+    color: white;
+    background-color: rgb(232, 58, 55);
+    text-decoration: none;
+    font-size: 1em;
+    font-family: Raleway;
+    border-width: 0px;
+    position: absolute;
+    cursor: pointer;
+}
+
 
 #deletebutton {
     padding: 10px 20px;

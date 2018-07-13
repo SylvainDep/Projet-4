@@ -1,7 +1,7 @@
 <?php $title = htmlspecialchars($post['title']); ?>
 
 <?php ob_start(); ?>
-<?php if($_GET['origin'] == 'commentalert') {
+<?php if(!empty($_GET['origin']) && $_GET['origin'] == 'commentalert') {
     echo '<p id="confirmationmodalcontainer">Le commentaire a bien été signalé</p>';
 } ?>
 

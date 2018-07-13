@@ -27,7 +27,7 @@ class backController
         $post = $_GET['postid'];
         $commentManager->removeAlert($alertcomment);
 
-        header('Location: index.php?action=homeadmin');
+        header('Location: index.php?action=homeadmin&origin=checkcomment');
     }
 
     public function newPost()
@@ -81,7 +81,7 @@ class backController
         if ($affectedLines === false) {
             throw new Exception('Impossible d\'ajouter l\'article !');
         } else {
-            header('Location: index.php?action=homeadmin');
+            header('Location: index.php?action=homeadmin&origin=deletepost');
         }
     }
 
@@ -94,7 +94,7 @@ class backController
         if ($affectedLines === false) {
             throw new Exception('Impossible d\'ajouter l\'article !');
         } else {
-            header('Location: index.php?action=homeadmin');
+            header('Location: index.php?action=homeadmin&origin=deletecomment');
         }
     }
 
@@ -107,7 +107,7 @@ class backController
         if ($affectedLines === false) {
             throw new Exception('Impossible d\'ajouter l\'article !');
         } else {
-            header('Location: index.php?action=editpost&id=' . $postId);
+            header('Location: index.php?action=editpost&origin=deletecomment&id=' . $postId);
         }
     }
 
