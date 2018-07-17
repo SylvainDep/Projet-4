@@ -1,9 +1,11 @@
 <?php ob_start(); ?>
 <head>
-    <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+    <script type="text/javascript" src="/public/js/tinymce/tinymce.min.js"></script>
     <script>
         tinymce.init({
-            selector: '#blogbody'
+            selector: '#blogbody',
+            mode : "textareas",
+            language : "fr_FR"
         });
     </script>
 </head>

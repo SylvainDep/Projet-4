@@ -248,10 +248,6 @@ input[type=submit] {
     height: 500px!important;
 }
 
-.mce-widget {
-    display: none;
-}
-
 #texteditor > label {
     display: inline-block;
     margin-top: 15px;
