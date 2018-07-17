@@ -7,6 +7,14 @@
         <link href="https://fonts.googleapis.com/css?family=Lato|Raleway" rel="stylesheet">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+        <script type="text/javascript" src="/public/js/tinymce/tinymce.min.js"></script>
+        <script>
+            tinymce.init({
+                selector: '#blogbody',
+                mode : "textareas",
+                language : "fr_FR"
+            });
+        </script>
     </head>
         
     <body>

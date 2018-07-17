@@ -1,7 +1,7 @@
 <?php $title = 'Jean Forteroche - Billet simple pour l\'Alaska'; ?>
 
 <?php ob_start(); ?>
-<h2>Dernières publications</h2>
+<h2>Derniers billets :</h2>
 
 
 <?php

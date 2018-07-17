@@ -12,7 +12,7 @@ if(!empty($_GET['origin']) && $_GET['origin'] == 'deletecomment') {
 ?>
 
 <a id="contentaction" href="index.php?action=newpost">Ajouter nouvel article</a>
-<p>Dernières publications :</p>
+<p>Derniers billets :</p>
 <?php
 while ($data = $posts->fetch())
 {
