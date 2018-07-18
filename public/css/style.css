@@ -65,9 +65,8 @@ p, label, a, input[type=submit] {
     margin: 40px 0px;
 }
 
-.commentblock:nth-child(even) {
+.commentblock:nth-child(odd) {
     background-color: #CFCFA4;
-    padding: 5px;
 }
 
 .signalcontainer {
@@ -147,6 +146,12 @@ p, label, a, input[type=submit] {
     border-width: 0px;
     position: absolute;
     cursor: pointer;
+    min-width: 175px;
+}
+
+#deletepostcontainer {
+    float: right;
+    width: 175px;
 }
 
 
@@ -174,6 +179,14 @@ input[type=submit] {
     background-color: #004056;
     text-decoration: none;
     border-width: 0;
+}
+
+#publishbutton, #unpublishbutton {
+    padding: 10px 20px;
+    color: white;
+    background-color: grey;
+    text-decoration: none;
+    display: inline-block;
 }
 
 /* COMMENT AREA */
@@ -217,7 +230,7 @@ input[type=submit] {
 }
 
 .commententry {
-    max-width: calc(100% - 100px);
+    max-width: calc(100% - 120px);
     word-wrap: break-word;
 }
 

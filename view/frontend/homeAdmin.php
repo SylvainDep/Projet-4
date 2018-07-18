@@ -20,7 +20,12 @@ while ($data = $posts->fetch())
     <div class="news">
         <h3>
             <?= htmlspecialchars($data['title']) ?>
-            <em>le <?= $data['creation_date_fr'] ?></em>
+            <em>le <?= $data['creation_date_fr'] ?></em> -
+            <?php if($data['published'] == 1) {
+                echo 'PUBLIÉ';
+            } else {
+                echo '<span style="color: #D74940; background-color: white">HORS LIGNE</span>';
+            } ?>
         </h3>
 
         <p>

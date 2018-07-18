@@ -145,4 +145,24 @@ class backController
 
         require('view/frontend/logout.php');
     }
+
+    public function publishPost($postId)
+    {
+        $postManager = new \Blog\Model\PostManager();
+
+        $postManager->setPublished($postId);
+
+        header('Location: http://localhost:8888/index.php?action=editpost&id=' . $postId);
+
+    }
+
+    public function unpublishPost($postId)
+    {
+        $postManager = new \Blog\Model\PostManager();
+
+        $postManager->setUnpublished($postId);
+
+        header('Location: http://localhost:8888/index.php?action=editpost&id=' . $postId);
+
+    }
 }

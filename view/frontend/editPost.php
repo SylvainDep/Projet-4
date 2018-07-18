@@ -16,10 +16,18 @@ if(!empty($_GET['origin']) && $_GET['origin'] == 'deletecomment') {
     <br/>
     <input type="submit"/>
 </form>
+
 <div id="deletepostcontainer">
     <button id="first_step_deletecomment" onclick="document.getElementById('first_step_deletecomment').style.display='none'">Supprimer l'article</button>
     <a id="deletebutton" href="index.php?action=deletepost&amp;id=<?= $post['id'] ?>">Confirmer</a>
 </div>
+
+<?php if($post['published'] == 0) { ?>
+    <a id="publishbutton" href="index.php?action=publishpost&amp;id=<?= $post['id'] ?>">Publier</a>
+<?php } else { ?>
+    <a id="unpublishbutton" href="index.php?action=unpublishpost&amp;id=<?= $post['id'] ?>">Retirer</a>
+<?php }
+?>
 
 <?php
 while ($comment = $comments->fetch())

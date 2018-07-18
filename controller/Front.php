@@ -11,8 +11,7 @@ class frontController
     public function listPosts()
     {
         $postManager = new \Blog\Model\PostManager();
-        $posts = $postManager->getPosts();
-
+        $posts = $postManager->getPublishedPosts();
 
         require('view/frontend/listPostsView.php');
     }

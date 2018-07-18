@@ -125,6 +125,18 @@ class Router
                     } else {
                         $backcontroller->logOut();
                     }
+                } elseif ($_GET['action'] == 'publishpost') {
+                    if (isset($_SESSION['admin']) && $_SESSION['admin'] == 'Jean') {
+                        $backcontroller->publishPost($_GET['id']);
+                    } else {
+                        $backcontroller->logOut();
+                    }
+                } elseif ($_GET['action'] == 'unpublishpost') {
+                    if (isset($_SESSION['admin']) && $_SESSION['admin'] == 'Jean') {
+                        $backcontroller->unpublishPost($_GET['id']);
+                    } else {
+                        $backcontroller->logOut();
+                    }
                 } elseif ($_GET['action'] == 'logout') {
                     $backcontroller->logOut();
                 }
