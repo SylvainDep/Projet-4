@@ -8,6 +8,21 @@ require_once('model/AdminManager.php');
 
 class backController
 {
+    public function __construct()
+    {
+        $this->checkAdmin();
+    }
+
+    private function checkAdmin()
+    {
+        if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
+            return;
+        } else {
+            $this->logOut();
+            die();
+        }
+    }
+
     public function adminBoard()
     {
         $postManager = new \Blog\Model\PostManager();
@@ -111,34 +126,6 @@ class backController
         }
     }
 
-    public function checkpassword($userPassword, $userId)
-    {
-        $AdminManager = new \Blog\Model\AdminManager();
-
-        $resultat = $AdminManager->getCredentials();
-
-        $isPasswordCorrect = password_verify($userPassword, $resultat['password']);
-
-        if($userId == $resultat['user']) {
-            $isIdCorrect = true;
-        } else {
-            $isIdCorrect = false;
-        }
-
-        if (!$resultat) {
-            echo 'Le service est temporairement indisponible, veuillez réessayer plus tard';
-        } else {
-            if ($isPasswordCorrect AND $isIdCorrect) {
-                $_SESSION['admin'] = 'Jean';
-                $this->adminBoard();
-            } else {
-                echo 'Mauvais identifiant ou mot de passe ! 
-                <a href="index.php">Revenir à l\'accueil</a>
-                <a href="index.php?action=login">Connexion</a>';
-            }
-        }
-    }
-
     public function logOut()
     {
         $_SESSION = array();
@@ -163,6 +150,5 @@ class backController
         $postManager->setUnpublished($postId);
 
         header('Location: http://localhost:8888/index.php?action=editpost&id=' . $postId);
-
     }
 }

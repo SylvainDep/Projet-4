@@ -5,6 +5,7 @@ namespace Blog\Controller;
 require_once('model/PostManager.php');
 require_once('model/CommentManager.php');
 require_once('model/AdminManager.php');
+require_once('Back.php');
 
 class frontController
 {
@@ -45,6 +46,25 @@ class frontController
         require('view/frontend/login.php');
     }
 
+    public function passwordPage()
+    {
+        require('view/frontend/passwordrecovery.php');
+    }
+
+    public function recoverPassword($useremail)
+    {
+        $AdminManager = new \Blog\Model\AdminManager();
+
+        $resultat = $AdminManager->getAdminEmail();
+
+        if ($resultat['email'] == $useremail) {
+            mail ($resultat['email'], 'Récupération de mot de passe' , 'Le mot de passe pour accéder au site est Alaska2018');
+            header('Location: index.php?action=login');
+        } else {
+            throw new Exception('Votre adresse mail n\'est pas reconnue');
+        }
+    }
+
     public function doAlert($post, $alertcomment)
     {
         $postManager = new \Blog\Model\PostManager();
@@ -54,5 +74,34 @@ class frontController
         $commentManager->setAlert($_GET['commentid']);
 
         header('Location: index.php?action=post&origin=commentalert&id=' . $post);
+    }
+
+    public function checkpassword($userPassword, $userId)
+    {
+        $AdminManager = new \Blog\Model\AdminManager();
+
+        $resultat = $AdminManager->getCredentials();
+
+        $isPasswordCorrect = password_verify($userPassword, $resultat['password']);
+
+        if($userId == $resultat['user']) {
+            $isIdCorrect = true;
+        } else {
+            $isIdCorrect = false;
+        }
+
+        if (!$resultat) {
+            echo 'Le service est temporairement indisponible, veuillez réessayer plus tard';
+        } else {
+            if ($isPasswordCorrect AND $isIdCorrect) {
+                $_SESSION['admin'] = 'Jean';
+                $backcontroller = new \Blog\Controller\backController();
+                $backcontroller->adminBoard();
+            } else {
+                echo 'Mauvais identifiant ou mot de passe ! 
+                <a href="index.php">Revenir à l\'accueil</a>
+                <a href="index.php?action=login">Connexion</a>';
+            }
+        }
     }
 }

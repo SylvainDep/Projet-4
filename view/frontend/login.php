@@ -8,6 +8,7 @@
     <br/><br/>
    <label for="password">Mot de passe</label>
    <input type="password" name="password" />
+    <p><a href="index.php?action=passwordrecovery">Mot de passe oublié ?</a></p>
     <br/><br/>
    <input type="submit" value="Connexion">
 </form>
