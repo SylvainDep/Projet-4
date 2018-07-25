@@ -4,6 +4,12 @@
 <?php
 if(!empty($_GET['origin']) && $_GET['origin'] == 'deletecomment') {
     echo '<p id="confirmationmodalcontainer">Le commentaire a bien été supprimé</p>';
+} elseif(!empty($_GET['origin']) && $_GET['origin'] == 'editedpost') {
+    echo '<p id="confirmationmodalcontainer">La modification de l\'article a bien été prise en compte</p>';
+} elseif (!empty($_GET['origin']) && $_GET['origin'] == 'publishedpost') {
+    echo '<p id="confirmationmodalcontainer">L\'article est maintenant en ligne</p>';
+} elseif (!empty($_GET['origin']) && $_GET['origin'] == 'unpublishedpost') {
+    echo '<p id="confirmationmodalcontainer">L\'article est maintenant hors ligne</p>';
 }
 ?>
 

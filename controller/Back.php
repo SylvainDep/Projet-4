@@ -83,7 +83,7 @@ class backController
         if ($affectedLines === false) {
             throw new Exception('Impossible d\'ajouter l\'article !');
         } else {
-            header('Location: http://localhost:8888/index.php?action=editpost&id=' . $postId);
+            header('Location: http://localhost:8888/index.php?action=editpost&origin=editedpost&id=' . $postId);
         }
     }
 
@@ -139,7 +139,7 @@ class backController
 
         $postManager->setPublished($postId);
 
-        header('Location: http://localhost:8888/index.php?action=editpost&id=' . $postId);
+        header('Location: http://localhost:8888/index.php?action=editpost&origin=publishedpost&id=' . $postId);
 
     }
 
@@ -149,6 +149,6 @@ class backController
 
         $postManager->setUnpublished($postId);
 
-        header('Location: http://localhost:8888/index.php?action=editpost&id=' . $postId);
+        header('Location: http://localhost:8888/index.php?action=editpost&origin=unpublishedpost&id=' . $postId);
     }
 }

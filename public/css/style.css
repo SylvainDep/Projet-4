@@ -116,6 +116,7 @@ p, label, a, input[type=submit] {
     -o-animation-duration: 5s;
     animation-duration: 5s;
     animation-fill-mode: forwards;
+    z-index: 2999;
 }
 
 .deletecontainer {
