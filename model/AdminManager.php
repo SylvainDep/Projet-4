@@ -18,7 +18,7 @@ class AdminManager extends Manager
     public function getAdminEmail()
     {
         $db = $this->dbConnect();
-        $req = $db->query('SELECT email FROM member');
+        $req = $db->query('SELECT email, password FROM member');
         $resultat = $req->fetch();
 
         return $resultat;

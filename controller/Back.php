@@ -8,147 +8,191 @@ require_once('model/AdminManager.php');
 
 class backController
 {
-    public function __construct()
-    {
-        $this->checkAdmin();
-    }
-
-    private function checkAdmin()
+    public function adminBoard()
     {
         if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
-            return;
+            $postManager = new \Blog\Model\PostManager();
+            $commentManager = new \Blog\Model\CommentManager();
+
+            $posts = $postManager->getPosts();
+            $alerts = $commentManager->getAlertComments();
+
+            require('view/frontend/homeadmin.php');
         } else {
             $this->logOut();
             die();
         }
     }
 
-    public function adminBoard()
-    {
-        $postManager = new \Blog\Model\PostManager();
-        $commentManager = new \Blog\Model\CommentManager();
-
-        $posts = $postManager->getPosts();
-        $alerts = $commentManager->getAlertComments();
-
-        require('view/frontend/homeadmin.php');
-    }
-
     public function checkComment($alertcomment)
     {
-        $postManager = new \Blog\Model\PostManager();
-        $commentManager = new \Blog\Model\CommentManager();
+        if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
+            $postManager = new \Blog\Model\PostManager();
+            $commentManager = new \Blog\Model\CommentManager();
 
-        $post = $_GET['postid'];
-        $commentManager->removeAlert($alertcomment);
+            $post = $_GET['postid'];
+            $commentManager->removeAlert($alertcomment);
 
-        header('Location: index.php?action=homeadmin&origin=checkcomment');
+            header('Location: index.php?action=homeadmin&origin=checkcomment');
+        } else {
+            $this->logOut();
+            die();
+        }
     }
 
     public function newPost()
     {
-        require('view/frontend/newpost.php');
+        if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
+            require('view/frontend/newpost.php');
+        } else {
+            $this->logOut();
+            die();
+        }
     }
 
     public function editPost()
     {
-        $postManager = new \Blog\Model\PostManager();
-        $commentManager = new \Blog\Model\CommentManager();
+        if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
+            $postManager = new \Blog\Model\PostManager();
+            $commentManager = new \Blog\Model\CommentManager();
 
-        $post = $postManager->getPost($_GET['id']);
-        $comments = $commentManager->getComments($_GET['id']);
+            $post = $postManager->getPost($_GET['id']);
+            $comments = $commentManager->getComments($_GET['id']);
 
-        require('view/frontend/editpost.php');
+            require('view/frontend/editpost.php');
+        } else {
+            $this->logOut();
+            die();
+        }
     }
 
     public function addPost($title, $content)
     {
-        $postManager = new \Blog\Model\PostManager();
+        if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
+            $postManager = new \Blog\Model\PostManager();
 
-        $affectedLines = $postManager->addPost($title, $content);
+            $affectedLines = $postManager->addPost($title, $content);
 
-        if ($affectedLines === false) {
-            throw new Exception('Impossible d\'ajouter l\'article !');
+            if ($affectedLines === false) {
+                throw new Exception('Impossible d\'ajouter l\'article !');
+            } else {
+                header('Location: index.php?action=homeadmin');
+            }
         } else {
-            header('Location: index.php?action=homeadmin');
+            $this->logOut();
+            die();
         }
     }
 
     public function updatePost($title, $content, $postId)
     {
-        $postManager = new \Blog\Model\PostManager();
+        if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
+            $postManager = new \Blog\Model\PostManager();
 
-        $affectedLines = $postManager->replacePost($title, $content, $postId);
+            $affectedLines = $postManager->replacePost($title, $content, $postId);
 
-        if ($affectedLines === false) {
-            throw new Exception('Impossible d\'ajouter l\'article !');
+            if ($affectedLines === false) {
+                throw new Exception('Impossible d\'ajouter l\'article !');
+            } else {
+                header('Location: http://localhost:8888/index.php?action=editpost&origin=editedpost&id=' . $postId);
+            }
         } else {
-            header('Location: http://localhost:8888/index.php?action=editpost&origin=editedpost&id=' . $postId);
+            $this->logOut();
+            die();
         }
     }
 
     public function deletePost($postId)
     {
-        $postManager = new \Blog\Model\PostManager();
+        if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
+            $postManager = new \Blog\Model\PostManager();
 
-        $affectedLines = $postManager->deletePost($postId);
+            $affectedLines = $postManager->deletePost($postId);
 
-        if ($affectedLines === false) {
-            throw new Exception('Impossible d\'ajouter l\'article !');
+            if ($affectedLines === false) {
+                throw new Exception('Impossible d\'ajouter l\'article !');
+            } else {
+                header('Location: index.php?action=homeadmin&origin=deletepost');
+            }
         } else {
-            header('Location: index.php?action=homeadmin&origin=deletepost');
+            $this->logOut();
+            die();
         }
     }
 
     public function deleteComment($commentId)
     {
-        $commentManager = new \Blog\Model\CommentManager();
+        if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
+            $commentManager = new \Blog\Model\CommentManager();
 
-        $affectedLines = $commentManager->removeComment($commentId);
+            $affectedLines = $commentManager->removeComment($commentId);
 
-        if ($affectedLines === false) {
-            throw new Exception('Impossible d\'ajouter l\'article !');
+            if ($affectedLines === false) {
+                throw new Exception('Impossible d\'ajouter l\'article !');
+            } else {
+                header('Location: index.php?action=homeadmin&origin=deletecomment');
+            }
         } else {
-            header('Location: index.php?action=homeadmin&origin=deletecomment');
+            $this->logOut();
+            die();
         }
     }
 
     public function deletePostComment($commentId, $postId)
     {
-        $commentManager = new \Blog\Model\CommentManager();
+        if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
+            $commentManager = new \Blog\Model\CommentManager();
 
-        $affectedLines = $commentManager->removeComment($commentId);
+            $affectedLines = $commentManager->removeComment($commentId);
 
-        if ($affectedLines === false) {
-            throw new Exception('Impossible d\'ajouter l\'article !');
+            if ($affectedLines === false) {
+                throw new Exception('Impossible d\'ajouter l\'article !');
+            } else {
+                header('Location: index.php?action=editpost&origin=deletecomment&id=' . $postId);
+            }
         } else {
-            header('Location: index.php?action=editpost&origin=deletecomment&id=' . $postId);
+            $this->logOut();
+            die();
         }
     }
 
     public function logOut()
     {
-        $_SESSION = array();
+        if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
+            $_SESSION = array();
 
-        require('view/frontend/logout.php');
+            require('view/frontend/logout.php');
+        } else {
+            $this->logOut();
+            die();
+        }
     }
 
     public function publishPost($postId)
     {
-        $postManager = new \Blog\Model\PostManager();
+        if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
+            $postManager = new \Blog\Model\PostManager();
 
-        $postManager->setPublished($postId);
+            $postManager->setPublished($postId);
 
-        header('Location: http://localhost:8888/index.php?action=editpost&origin=publishedpost&id=' . $postId);
-
+            header('Location: http://localhost:8888/index.php?action=editpost&origin=publishedpost&id=' . $postId);
+        } else {
+            $this->logOut();
+            die();
+        }
     }
 
     public function unpublishPost($postId)
     {
-        $postManager = new \Blog\Model\PostManager();
+        if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
+            $postManager = new \Blog\Model\PostManager();
 
-        $postManager->setUnpublished($postId);
+            $postManager->setUnpublished($postId);
 
-        header('Location: http://localhost:8888/index.php?action=editpost&origin=unpublishedpost&id=' . $postId);
+            header('Location: http://localhost:8888/index.php?action=editpost&origin=unpublishedpost&id=' . $postId);
+        } else {
+            $this->logOut();
+            die();
+        }
     }
 }

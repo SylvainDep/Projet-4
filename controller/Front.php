@@ -2,6 +2,8 @@
 
 namespace Blog\Controller;
 
+use Exception;
+
 require_once('model/PostManager.php');
 require_once('model/CommentManager.php');
 require_once('model/AdminManager.php');
@@ -58,7 +60,7 @@ class frontController
         $resultat = $AdminManager->getAdminEmail();
 
         if ($resultat['email'] == $useremail) {
-            mail ($resultat['email'], 'Récupération de mot de passe' , 'Le mot de passe pour accéder au site est Alaska2018');
+            mail ($resultat['email'], 'Récupération de mot de passe' , 'Le mot de passe pour accéder au site est' . $resultat['password']);
             header('Location: index.php?action=login');
         } else {
             throw new Exception('Votre adresse mail n\'est pas reconnue');
