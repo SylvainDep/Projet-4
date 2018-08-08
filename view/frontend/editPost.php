@@ -13,6 +13,8 @@ if(!empty($_GET['origin']) && $_GET['origin'] == 'deletecomment') {
 }
 ?>
 
+<h2>Éditer article</h2>
+
 <form id="texteditor" method="post" action="index.php?action=updatepost&amp;id=<?= $post['id'] ?>" >
     <label>Titre</label><br/>
     <input type="text" name="title" value="<?= $post['title'] ?>"/>

@@ -1,8 +1,15 @@
 <?php $title = 'Jean Forteroche - Billet simple pour l\'Alaska'; ?>
 
 <?php ob_start(); ?>
-<h2>Derniers billets :</h2>
+<div id="general_intro">
+    <img src="../../public/images/writer_portrait.png"/>
+    <p>Après <i>Panique à Caracas</i>, découvrez en exclusivité le nouveau roman de Jean Forteroche.</p>
+    <p>Du suspense, de l'action et de la bagarre, découvrez cette histoire publiée au rythme d'un chapitre par semaine. Tout commentaire sur l'évolution de l'intrigue et de l'écriture sera très apprécié !</p>
+</div>
 
+<hr>
+
+<h2>Derniers billets :</h2>
 
 <?php
 while ($data = $posts->fetch())

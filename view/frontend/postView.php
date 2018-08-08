@@ -5,7 +5,6 @@
     echo '<p id="confirmationmodalcontainer">Le commentaire a bien été signalé</p>';
 } ?>
 
-<h1>Mon super blog !</h1>
 <p><a href="index.php">Retour à la liste des billets</a></p>
 
 <div class="news">

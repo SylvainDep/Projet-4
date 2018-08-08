@@ -2,6 +2,8 @@
 
 namespace App\config;
 
+use Exception;
+
 class Router
 {
     public function start()

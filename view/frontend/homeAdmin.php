@@ -11,6 +11,8 @@ if(!empty($_GET['origin']) && $_GET['origin'] == 'deletecomment') {
 }
 ?>
 
+<h2>Tableau d'administration</h2>
+
 <a id="contentaction" href="index.php?action=newpost">Ajouter nouvel article</a>
 <p>Derniers billets :</p>
 <?php

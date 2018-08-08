@@ -4,6 +4,7 @@ session_start();
 
 require 'autoloader.php';
 require 'debug.php';
+require 'router.php';
 
 $autoloader = new \App\config\Autoloader;
 $autoloader->register();

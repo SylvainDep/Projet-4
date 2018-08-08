@@ -6,6 +6,8 @@ require_once('model/PostManager.php');
 require_once('model/CommentManager.php');
 require_once('model/AdminManager.php');
 
+use Exception;
+
 class backController
 {
     public function adminBoard()
@@ -17,7 +19,7 @@ class backController
             $posts = $postManager->getPosts();
             $alerts = $commentManager->getAlertComments();
 
-            require('view/frontend/homeadmin.php');
+            require('view/frontend/homeAdmin.php');
         } else {
             $this->logOut();
             die();
@@ -59,7 +61,7 @@ class backController
             $post = $postManager->getPost($_GET['id']);
             $comments = $commentManager->getComments($_GET['id']);
 
-            require('view/frontend/editpost.php');
+            require('view/frontend/editPost.php');
         } else {
             $this->logOut();
             die();
@@ -94,7 +96,7 @@ class backController
             if ($affectedLines === false) {
                 throw new Exception('Impossible d\'ajouter l\'article !');
             } else {
-                header('Location: http://localhost:8888/index.php?action=editpost&origin=editedpost&id=' . $postId);
+                header('Location: index.php?action=editpost&origin=editedpost&id=' . $postId);
             }
         } else {
             $this->logOut();
@@ -158,14 +160,9 @@ class backController
 
     public function logOut()
     {
-        if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
-            $_SESSION = array();
+        $_SESSION = array();
 
-            require('view/frontend/logout.php');
-        } else {
-            $this->logOut();
-            die();
-        }
+        require('view/frontend/logout.php');
     }
 
     public function publishPost($postId)
@@ -175,7 +172,7 @@ class backController
 
             $postManager->setPublished($postId);
 
-            header('Location: http://localhost:8888/index.php?action=editpost&origin=publishedpost&id=' . $postId);
+            header('Location: index.php?action=editpost&origin=publishedpost&id=' . $postId);
         } else {
             $this->logOut();
             die();
@@ -189,7 +186,7 @@ class backController
 
             $postManager->setUnpublished($postId);
 
-            header('Location: http://localhost:8888/index.php?action=editpost&origin=unpublishedpost&id=' . $postId);
+            header('Location: index.php?action=editpost&origin=unpublishedpost&id=' . $postId);
         } else {
             $this->logOut();
             die();
