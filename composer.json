@@ -1,0 +1,24 @@
+{
+    "name": "alaska/composer",
+    "authors": [
+        {
+            "name": "SylvainDep",
+            "email": "sylvaindepardieu78@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Blog\\": "controller/",
+            "Model\\": "model/"
+        },
+        "files": [
+            "debug.php",
+            "router.php"
+        ],
+        "classmap": [
+            "controller/",
+            "model/"
+        ]
+    }
+}

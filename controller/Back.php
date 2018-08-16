@@ -2,19 +2,21 @@
 
 namespace Blog\Controller;
 
-require_once('model/PostManager.php');
-require_once('model/CommentManager.php');
-require_once('model/AdminManager.php');
+require 'vendor/autoload.php';
 
+use Model\PostManager as PostManager;
+use Model\CommentManager as CommentManager;
 use Exception;
 
 class backController
 {
+
+
     public function adminBoard()
     {
         if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
-            $postManager = new \Blog\Model\PostManager();
-            $commentManager = new \Blog\Model\CommentManager();
+            $postManager = new PostManager();
+            $commentManager = new CommentManager();
 
             $posts = $postManager->getPosts();
             $alerts = $commentManager->getAlertComments();
@@ -29,8 +31,8 @@ class backController
     public function checkComment($alertcomment)
     {
         if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
-            $postManager = new \Blog\Model\PostManager();
-            $commentManager = new \Blog\Model\CommentManager();
+            $postManager = new PostManager();
+            $commentManager = new CommentManager();
 
             $post = $_GET['postid'];
             $commentManager->removeAlert($alertcomment);
@@ -55,8 +57,8 @@ class backController
     public function editPost()
     {
         if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
-            $postManager = new \Blog\Model\PostManager();
-            $commentManager = new \Blog\Model\CommentManager();
+            $postManager = new PostManager();
+            $commentManager = new CommentManager();
 
             $post = $postManager->getPost($_GET['id']);
             $comments = $commentManager->getComments($_GET['id']);
@@ -71,7 +73,7 @@ class backController
     public function addPost($title, $content)
     {
         if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
-            $postManager = new \Blog\Model\PostManager();
+            $postManager = new PostManager();
 
             $affectedLines = $postManager->addPost($title, $content);
 
@@ -89,7 +91,7 @@ class backController
     public function updatePost($title, $content, $postId)
     {
         if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
-            $postManager = new \Blog\Model\PostManager();
+            $postManager = new PostManager();
 
             $affectedLines = $postManager->replacePost($title, $content, $postId);
 
@@ -107,7 +109,7 @@ class backController
     public function deletePost($postId)
     {
         if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
-            $postManager = new \Blog\Model\PostManager();
+            $postManager = new PostManager();
 
             $affectedLines = $postManager->deletePost($postId);
 
@@ -125,7 +127,7 @@ class backController
     public function deleteComment($commentId)
     {
         if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
-            $commentManager = new \Blog\Model\CommentManager();
+            $commentManager = new CommentManager();
 
             $affectedLines = $commentManager->removeComment($commentId);
 
@@ -143,7 +145,7 @@ class backController
     public function deletePostComment($commentId, $postId)
     {
         if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
-            $commentManager = new \Blog\Model\CommentManager();
+            $commentManager = new CommentManager();
 
             $affectedLines = $commentManager->removeComment($commentId);
 
@@ -168,7 +170,7 @@ class backController
     public function publishPost($postId)
     {
         if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
-            $postManager = new \Blog\Model\PostManager();
+            $postManager = new PostManager();
 
             $postManager->setPublished($postId);
 
@@ -182,7 +184,7 @@ class backController
     public function unpublishPost($postId)
     {
         if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
-            $postManager = new \Blog\Model\PostManager();
+            $postManager = new PostManager();
 
             $postManager->setUnpublished($postId);
 

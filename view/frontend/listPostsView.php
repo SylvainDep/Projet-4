@@ -1,3 +1,11 @@
+<?php
+require_once 'htmlpurifier/library/HTMLPurifier.auto.php';
+
+$config = HTMLPurifier_Config::createDefault();
+$purifier = new HTMLPurifier($config);
+
+?>
+
 <?php $title = 'Jean Forteroche - Billet simple pour l\'Alaska'; ?>
 
 <?php ob_start(); ?>
@@ -14,19 +22,19 @@
 <?php
 while ($data = $posts->fetch())
 {
+    $data['title'] = $purifier->purify($data['title']);
+    $data['content'] = $purifier->purify($data['content']);
 ?>
     <div class="news">
         <h3>
-            <?= htmlspecialchars($data['title']) ?>
+            <?= $data['title'] ?>
             <em>le <?= $data['creation_date_fr'] ?></em>
         </h3>
 
-        <p>
-            <?= nl2br(htmlspecialchars(substr(strip_tags(html_entity_decode($data['content'])), 0, 500) . '...')) ?>
-            <br />
-            <br/>
-            <em><a href="index.php?action=post&amp;id=<?= $data['id'] ?>">Lire la suite</a></em>
-        </p>
+
+            <?= $data['content'] ?>
+        <p><em><a href="index.php?action=post&amp;id=<?= $data['id'] ?>">Lire la suite</a></em></p>
+
     </div>
 <?php
 }

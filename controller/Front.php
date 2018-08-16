@@ -2,18 +2,18 @@
 
 namespace Blog\Controller;
 
-use Exception;
+require 'vendor/autoload.php';
 
-require_once('model/PostManager.php');
-require_once('model/CommentManager.php');
-require_once('model/AdminManager.php');
-require_once('Back.php');
+use Model\PostManager as PostManager;
+use Model\CommentManager as CommentManager;
+use Model\AdminManager as AdminManager;
+use Exception;
 
 class frontController
 {
     public function listPosts()
     {
-        $postManager = new \Blog\Model\PostManager();
+        $postManager = new PostManager();
         $posts = $postManager->getPublishedPosts();
 
         require('view/frontend/listPostsView.php');
@@ -21,8 +21,8 @@ class frontController
 
     public function post()
     {
-        $postManager = new \Blog\Model\PostManager();
-        $commentManager = new \Blog\Model\CommentManager();
+        $postManager = new PostManager();
+        $commentManager = new CommentManager();
 
         $post = $postManager->getPost($_GET['id']);
         $comments = $commentManager->getComments($_GET['id']);
@@ -32,7 +32,7 @@ class frontController
 
     public function addComment($postId, $author, $comment)
     {
-        $commentManager = new \Blog\Model\CommentManager();
+        $commentManager = new CommentManager();
 
         $affectedLines = $commentManager->postComment($postId, $author, $comment);
 
@@ -55,7 +55,7 @@ class frontController
 
     public function recoverPassword($useremail)
     {
-        $AdminManager = new \Blog\Model\AdminManager();
+        $AdminManager = new AdminManager();
 
         $resultat = $AdminManager->getAdminEmail();
 
@@ -69,8 +69,8 @@ class frontController
 
     public function doAlert($post, $alertcomment)
     {
-        $postManager = new \Blog\Model\PostManager();
-        $commentManager = new \Blog\Model\CommentManager();
+        $postManager = new PostManager();
+        $commentManager = new CommentManager();
 
         $post = $_GET['postid'];
         $commentManager->setAlert($_GET['commentid']);
@@ -80,25 +80,20 @@ class frontController
 
     public function checkpassword($userPassword, $userId)
     {
-        $AdminManager = new \Blog\Model\AdminManager();
+        $AdminManager = new AdminManager();
 
         $resultat = $AdminManager->getCredentials();
 
         $isPasswordCorrect = password_verify($userPassword, $resultat['password']);
 
-        if($userId == $resultat['user']) {
-            $isIdCorrect = true;
-        } else {
-            $isIdCorrect = false;
-        }
+        $isIdCorrect = $userId == $resultat['user'];
 
         if (!$resultat) {
             echo 'Le service est temporairement indisponible, veuillez réessayer plus tard';
         } else {
             if ($isPasswordCorrect AND $isIdCorrect) {
                 $_SESSION['admin'] = 'Jean';
-                $backcontroller = new \Blog\Controller\backController();
-                $backcontroller->adminBoard();
+                header('Location: index.php?action=homeadmin');
             } else {
                 echo 'Mauvais identifiant ou mot de passe ! 
                 <a href="index.php">Revenir à l\'accueil</a>

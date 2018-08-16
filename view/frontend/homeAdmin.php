@@ -1,3 +1,11 @@
+<?php
+require_once 'htmlpurifier/library/HTMLPurifier.auto.php';
+
+$config = HTMLPurifier_Config::createDefault();
+$purifier = new HTMLPurifier($config);
+
+?>
+
 <?php $title = 'Administration du site'; ?>
 
 <?php ob_start(); ?>
@@ -18,10 +26,12 @@ if(!empty($_GET['origin']) && $_GET['origin'] == 'deletecomment') {
 <?php
 while ($data = $posts->fetch())
 {
+    $data['title'] = $purifier->purify($data['title']);
+    $data['content'] = $purifier->purify($data['content']);
 ?>
     <div class="news">
         <h3>
-            <?= htmlspecialchars($data['title']) ?>
+            <?= $data['title'] ?>
             <em>le <?= $data['creation_date_fr'] ?></em> -
             <?php if($data['published'] == 1) {
                 echo 'PUBLIÉ';
@@ -30,11 +40,9 @@ while ($data = $posts->fetch())
             } ?>
         </h3>
 
-        <p>
-            <?= nl2br(htmlspecialchars(substr(strip_tags(html_entity_decode($data['content'])), 0, 500) . '...')) ?>
-            <br />
-            <em><a href="index.php?action=editpost&amp;id=<?= $data['id'] ?>"><i class="fas fa-edit"></i> Editer cet article</a></em>
-        </p>
+
+            <?= $data['content'] ?>
+        <p><em><a href="index.php?action=editpost&amp;id=<?= $data['id'] ?>"><i class="fas fa-edit"></i> Editer cet article</a></em></p>
     </div>
 <?php
 }
@@ -46,9 +54,11 @@ $posts->closeCursor();
 <?php
 while ($comment = $alerts->fetch())
 {
+    $comment['comment'] = $purifier->purify($comment['comment']);
+    $comment['author'] = $purifier->purify($comment['author']);
 ?>
-    <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date_fr'] ?></p>
-    <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
+    <p><strong><?= $comment['author'] ?></strong> le <?= $comment['comment_date_fr'] ?></p>
+    <p><?= $comment['comment'] ?></p>
     <a id="checkbutton" href="index.php?action=checkcomment&amp;commentid=<?= $comment['id'] ?>">Valider le commentaire</a>
     <div class="deletecontainer">
         <button  class="first_step_deletecomment" id="<?= $comment['id'] ?>" onclick="document.getElementById('<?= $comment['id'] ?>').style.display='none'">Supprimer</button>

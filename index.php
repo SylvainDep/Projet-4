@@ -2,12 +2,7 @@
 
 session_start();
 
-require 'autoloader.php';
-require 'debug.php';
-require 'router.php';
-
-$autoloader = new \App\config\Autoloader;
-$autoloader->register();
+require 'vendor/autoload.php';
 
 $router = new \App\config\Router();
 $router->start();

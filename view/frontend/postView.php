@@ -1,3 +1,15 @@
+<?php
+    require_once 'htmlpurifier/library/HTMLPurifier.auto.php';
+
+    $config = HTMLPurifier_Config::createDefault();
+    $purifier = new HTMLPurifier($config);
+
+    $post['title'] = $purifier->purify($post['title']);
+    $post['content'] = $purifier->purify($post['content']);
+
+?>
+
+
 <?php $title = htmlspecialchars($post['title']); ?>
 
 <?php ob_start(); ?>
@@ -9,12 +21,12 @@
 
 <div class="news">
     <h3>
-        <?= htmlspecialchars($post['title']) ?>
+        <?= $post['title'] ?>
         <em>le <?= $post['creation_date_fr'] ?></em>
     </h3>
 
     <p>
-        <?= nl2br(htmlspecialchars(substr(strip_tags(html_entity_decode($post['content'])), 0, 500) . '...')) ?>
+        <?= $post['content'] ?>
     </p>
 </div>
 
@@ -38,11 +50,13 @@
     <?php
     while ($comment = $comments->fetch())
     {
+        $comment['comment'] = $purifier->purify($comment['comment']);
+        $comment['author'] = $purifier->purify($comment['author']);
     ?>
         <div class="commentblock">
             <div class="commententry">
-                <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date_fr'] ?></p>
-                <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
+                <p><strong><?= $comment['author'] ?></strong> le <?= $comment['comment_date_fr'] ?></p>
+                <p><?= $comment['comment'] ?></p>
             </div>
             <div class="signalcontainer">
                 <button  class="first_step_signal" id="<?= $comment['id'] ?>" onclick="document.getElementById('<?= $comment['id'] ?>').style.display='none'">Signaler</button>

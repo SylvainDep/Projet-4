@@ -1,4 +1,15 @@
-<?php $title = 'Edition de l\'article - ' . htmlspecialchars($post['title']); ?>
+<?php
+require_once 'htmlpurifier/library/HTMLPurifier.auto.php';
+
+$config = HTMLPurifier_Config::createDefault();
+$purifier = new HTMLPurifier($config);
+
+$post['title'] = $purifier->purify($post['title']);
+$post['content'] = $purifier->purify($post['content']);
+
+?>
+
+<?php $title = 'Edition de l\'article - ' . $post['title']; ?>
 
 <?php ob_start(); ?>
 <?php
@@ -40,11 +51,13 @@ if(!empty($_GET['origin']) && $_GET['origin'] == 'deletecomment') {
 <?php
 while ($comment = $comments->fetch())
 {
+    $comment['comment'] = $purifier->purify($comment['comment']);
+    $comment['author'] = $purifier->purify($comment['author']);
     ?>
     <div class="commentblock">
         <div class="commententry">
-            <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date_fr'] ?></p>
-            <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
+            <p><strong><?= $comment['author'] ?></strong> le <?= $comment['comment_date_fr'] ?></p>
+            <p><?= $comment['comment'] ?></p>
         </div>
         <div class="deletecontainer">
             <button  class="first_step_deletecomment" id="<?= $comment['id'] ?>" onclick="document.getElementById('<?= $comment['id'] ?>').style.display='none'">Supprimer</button>
