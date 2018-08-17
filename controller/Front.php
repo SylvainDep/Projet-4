@@ -4,13 +4,14 @@ namespace Blog\Controller;
 
 require 'vendor/autoload.php';
 
-use Model\PostManager as PostManager;
-use Model\CommentManager as CommentManager;
-use Model\AdminManager as AdminManager;
+use Model\PostManager;
+use Model\CommentManager;
+use Model\AdminManager;
 use Exception;
 
 class frontController
 {
+
     public function listPosts()
     {
         $postManager = new PostManager();

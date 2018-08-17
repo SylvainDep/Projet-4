@@ -1,5 +1,5 @@
 <?php
-require_once 'htmlpurifier/library/HTMLPurifier.auto.php';
+require_once 'vendor/htmlpurifier/library/HTMLPurifier.auto.php';
 
 $config = HTMLPurifier_Config::createDefault();
 $purifier = new HTMLPurifier($config);

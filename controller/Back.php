@@ -4,13 +4,12 @@ namespace Blog\Controller;
 
 require 'vendor/autoload.php';
 
-use Model\PostManager as PostManager;
-use Model\CommentManager as CommentManager;
+use Model\PostManager;
+use Model\CommentManager;
 use Exception;
 
 class backController
 {
-
 
     public function adminBoard()
     {
