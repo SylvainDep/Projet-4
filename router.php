@@ -6,6 +6,7 @@ require 'vendor/autoload.php';
 
 use Blog\Controller\frontController;
 use Blog\Controller\backController;
+use Blog\Auth;
 use Exception;
 
 
@@ -51,14 +52,14 @@ class Router
                         }
                         break;
                     case 'login':
-                        if (isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
+                        if (Auth::isAuth()) {
                             $backcontroller->adminBoard();
                         } else {
                             $frontcontroller->loginAccess();
                         }
                         break;
                     case 'homeadmin':
-                        if (isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
+                        if (Auth::isAuth()) {
                             $backcontroller->adminBoard();
                         } else {
                             if (isset($_POST['password']) AND isset($_POST['pseudo'])) {

@@ -7,6 +7,7 @@ require 'vendor/autoload.php';
 use Model\PostManager;
 use Model\CommentManager;
 use Model\AdminManager;
+use Blog\Auth;
 use Exception;
 
 class frontController
@@ -93,7 +94,7 @@ class frontController
             echo 'Le service est temporairement indisponible, veuillez réessayer plus tard';
         } else {
             if ($isPasswordCorrect AND $isIdCorrect) {
-                $_SESSION['admin'] = 'Jean';
+                Auth::auth();
                 header('Location: index.php?action=homeadmin');
             } else {
                 echo 'Mauvais identifiant ou mot de passe ! 

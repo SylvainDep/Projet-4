@@ -3,6 +3,16 @@
   <component name="PhpIncludePathManager">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/htmlpurifier/benchmarks" />
+      <path value="$PROJECT_DIR$/vendor/htmlpurifier/smoketests" />
+      <path value="$PROJECT_DIR$/vendor/htmlpurifier/docs" />
+      <path value="$PROJECT_DIR$/vendor/htmlpurifier/tests" />
+      <path value="$PROJECT_DIR$/vendor/htmlpurifier/library" />
+      <path value="$PROJECT_DIR$/vendor/htmlpurifier/extras" />
+      <path value="$PROJECT_DIR$/vendor/htmlpurifier/plugins" />
+      <path value="$PROJECT_DIR$/vendor/htmlpurifier/art" />
+      <path value="$PROJECT_DIR$/vendor/htmlpurifier/maintenance" />
+      <path value="$PROJECT_DIR$/vendor/htmlpurifier/configdoc" />
     </include_path>
   </component>
 </project>

@@ -6,6 +6,7 @@ require 'vendor/autoload.php';
 
 use Model\PostManager;
 use Model\CommentManager;
+use Blog\Auth;
 use Exception;
 
 class backController
@@ -13,7 +14,7 @@ class backController
 
     public function adminBoard()
     {
-        if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
+        if(Auth::isAuth()) {
             $postManager = new PostManager();
             $commentManager = new CommentManager();
 
@@ -22,14 +23,13 @@ class backController
 
             require('view/frontend/homeAdmin.php');
         } else {
-            $this->logOut();
-            die();
+            Auth::logout();
         }
     }
 
     public function checkComment($alertcomment)
     {
-        if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
+        if(Auth::isAuth()) {
             $postManager = new PostManager();
             $commentManager = new CommentManager();
 
@@ -38,24 +38,22 @@ class backController
 
             header('Location: index.php?action=homeadmin&origin=checkcomment');
         } else {
-            $this->logOut();
-            die();
+            Auth::logout();
         }
     }
 
     public function newPost()
     {
-        if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
+        if(Auth::isAuth()) {
             require('view/frontend/newpost.php');
         } else {
-            $this->logOut();
-            die();
+            Auth::logout();
         }
     }
 
     public function editPost()
     {
-        if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
+        if(Auth::isAuth()) {
             $postManager = new PostManager();
             $commentManager = new CommentManager();
 
@@ -64,14 +62,13 @@ class backController
 
             require('view/frontend/editPost.php');
         } else {
-            $this->logOut();
-            die();
+            Auth::logout();
         }
     }
 
     public function addPost($title, $content)
     {
-        if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
+        if(Auth::isAuth()) {
             $postManager = new PostManager();
 
             $affectedLines = $postManager->addPost($title, $content);
@@ -82,14 +79,13 @@ class backController
                 header('Location: index.php?action=homeadmin');
             }
         } else {
-            $this->logOut();
-            die();
+            Auth::logout();
         }
     }
 
     public function updatePost($title, $content, $postId)
     {
-        if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
+        if(Auth::isAuth()) {
             $postManager = new PostManager();
 
             $affectedLines = $postManager->replacePost($title, $content, $postId);
@@ -100,14 +96,13 @@ class backController
                 header('Location: index.php?action=editpost&origin=editedpost&id=' . $postId);
             }
         } else {
-            $this->logOut();
-            die();
+            Auth::logout();
         }
     }
 
     public function deletePost($postId)
     {
-        if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
+        if(Auth::isAuth()) {
             $postManager = new PostManager();
 
             $affectedLines = $postManager->deletePost($postId);
@@ -118,14 +113,13 @@ class backController
                 header('Location: index.php?action=homeadmin&origin=deletepost');
             }
         } else {
-            $this->logOut();
-            die();
+            Auth::logout();
         }
     }
 
     public function deleteComment($commentId)
     {
-        if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
+        if(Auth::isAuth()) {
             $commentManager = new CommentManager();
 
             $affectedLines = $commentManager->removeComment($commentId);
@@ -136,14 +130,13 @@ class backController
                 header('Location: index.php?action=homeadmin&origin=deletecomment');
             }
         } else {
-            $this->logOut();
-            die();
+            Auth::logout();
         }
     }
 
     public function deletePostComment($commentId, $postId)
     {
-        if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
+        if(Auth::isAuth()) {
             $commentManager = new CommentManager();
 
             $affectedLines = $commentManager->removeComment($commentId);
@@ -154,8 +147,7 @@ class backController
                 header('Location: index.php?action=editpost&origin=deletecomment&id=' . $postId);
             }
         } else {
-            $this->logOut();
-            die();
+            Auth::logout();
         }
     }
 
@@ -168,29 +160,27 @@ class backController
 
     public function publishPost($postId)
     {
-        if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
+        if(Auth::isAuth()) {
             $postManager = new PostManager();
 
             $postManager->setPublished($postId);
 
             header('Location: index.php?action=editpost&origin=publishedpost&id=' . $postId);
         } else {
-            $this->logOut();
-            die();
+            Auth::logout();
         }
     }
 
     public function unpublishPost($postId)
     {
-        if(isset($_SESSION['admin']) AND $_SESSION['admin'] == 'Jean') {
+        if(Auth::isAuth()) {
             $postManager = new PostManager();
 
             $postManager->setUnpublished($postId);
 
             header('Location: index.php?action=editpost&origin=unpublishedpost&id=' . $postId);
         } else {
-            $this->logOut();
-            die();
+            Auth::logout();
         }
     }
 }

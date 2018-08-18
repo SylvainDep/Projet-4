@@ -8,6 +8,16 @@
       <excludeFolder url="file://$MODULE_DIR$/temp" />
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/htmlpurifier/art" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/htmlpurifier/benchmarks" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/htmlpurifier/configdoc" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/htmlpurifier/docs" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/htmlpurifier/extras" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/htmlpurifier/library" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/htmlpurifier/maintenance" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/htmlpurifier/plugins" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/htmlpurifier/smoketests" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/htmlpurifier/tests" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
